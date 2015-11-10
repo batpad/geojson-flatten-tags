@@ -1,31 +1,10 @@
-<!doctype html>
+
 <html>
 	<head>
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+		<script src="lib/osmtogeojson.js"></script>
+		<script src="index.js"></script>
 
-		<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-		<script>
-
-$(document).ready(function() {
-	$('#doConvert').click(function(e) {
-		e.preventDefault();
-		var source = JSON.parse($('#source').val());
-		var dest = convertGeoJSON(source);
-		$('#destination').val(JSON.stringify(dest));
-	});
-
-});
-
-function convertGeoJSON(source) {
-	source.features.forEach(function(feature) {
-		var tags = feature.properties.tags;
-		for (key in tags) {
-			feature.properties[key] = tags[key];
-		}
-		delete feature.properties.tags;
-	});
-	return source;
-}
-		</script>
 		<style>
 		html, body {
 			margin: 0;
@@ -62,8 +41,9 @@ function convertGeoJSON(source) {
 	<body>
 		<div class="wrapper">
 			<div class="left">
-				<textarea id="source"></textarea>
-				<button id="doConvert">Convert</button>
+				<textarea id="source"></textarea> <br />
+				<button id="doConvert">Convert</button> OR
+				<input type="file" id="filePicker" />
 			</div>
 			<div class="right">
 				<textarea id="destination"></textarea>
